@@ -83,24 +83,25 @@ class Graph():
 
         for _id, plot in plots:
             times = []
-            for time in plot['time']:
-                times.append(datetime.datetime.fromtimestamp(float(time)))
-            label = format(u'{0} - ({1:g} {2})'.format(plot['name'],
-                                                    float(plot['value'][-1]),
-                                                    plot['units']))
-            linestyle, fill = self.__drawtype_to_mpl(plot['drawtype'])
-            if fill:
-                axes.fill_between(times, min(plot['value']),
-                                  plot['value'], color=plot['colour'],
-                                  label=label, antialiased=True)
-                show_legend = False
-            else:
-                axes.plot(times, plot['value'], color=plot['colour'],
-                      label=label, linewidth=4, linestyle=linestyle,
-                      antialiased=True)
-            axes.set_xticklabels(times, visible=False)
-            axes.set_ylabel(plot['units'])
-            axes.autoscale(True, 'both', True)
+            if len(plot['value']):
+                for time in plot['time']:
+                    times.append(datetime.datetime.fromtimestamp(float(time)))
+                label = format(u'{0} - ({1:g} {2})'.format(plot['name'],
+                                                           float(plot['value'][-1]),
+                                                           plot['units']))
+                linestyle, fill = self.__drawtype_to_mpl(plot['drawtype'])
+                if fill:
+                    axes.fill_between(times, min(plot['value']),
+                                      plot['value'], color=plot['colour'],
+                                      label=label, antialiased=True)
+                    show_legend = False
+                else:
+                    axes.plot(times, plot['value'], color=plot['colour'],
+                              label=label, linewidth=4, linestyle=linestyle,
+                              antialiased=True)
+                axes.set_xticklabels(times, visible=False)
+                axes.set_ylabel(plot['units'])
+                axes.autoscale(True, 'both', True)
 
         if show_legend:
             font = FontProperties()
