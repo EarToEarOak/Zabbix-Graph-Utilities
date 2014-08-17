@@ -3,7 +3,7 @@
 #
 # http://eartoearoak.com
 #
-# Copyright 2013 Al Brown
+# Copyright 2013 - 2014 Al Brown
 #
 # Utilities to display graphs from a Zabbix server using matplotlib.
 #
